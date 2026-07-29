@@ -1,11 +1,20 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
-import WorkflowNav from "@/components/WorkflowNav";
 import Header from "@/components/Header";
+import WorkflowNav from "@/components/WorkflowNav";
+import { useProtocol } from "@/context/ProtocolContext";
 
 export default function Methodology() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+  const {
+    populationDescription,
+    setPopulationDescription,
+    ageMin,
+    setAgeMin,
+    ageMax,
+    setAgeMax,
+  } = useProtocol();
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -66,15 +75,33 @@ export default function Methodology() {
                         Description
                         <span className="material-symbols-outlined text-[14px] opacity-40 cursor-help">help</span>
                       </label>
-                      <textarea className="w-full bg-gray-50 dark:bg-[#0b1326] p-3 border border-gray-200 dark:border-zinc-800 rounded-lg text-[14px] focus:ring-2 focus:ring-teal-500 outline-none placeholder-gray-400 text-gray-900 dark:text-white" placeholder="e.g. Adults with hypertension..." rows={3}></textarea>
+                      <textarea
+                        value={populationDescription}
+                        onChange={(e) => setPopulationDescription(e.target.value)}
+                        className="w-full bg-gray-50 dark:bg-[#0b1326] p-3 border border-gray-200 dark:border-zinc-800 rounded-lg text-[14px] focus:ring-2 focus:ring-teal-500 outline-none placeholder-gray-400 text-gray-900 dark:text-white"
+                        placeholder="e.g. Adults with hypertension..."
+                        rows={3}
+                      ></textarea>
                     </div>
 
                     <div className="space-y-1.5 flex flex-col text-left">
                       <label className="text-[12px] font-semibold text-gray-500 dark:text-zinc-400">Age Range</label>
                       <div className="flex items-center gap-3 mt-auto">
-                        <input className="w-full bg-gray-50 dark:bg-[#0b1326] p-2.5 border border-gray-200 dark:border-zinc-800 rounded-lg text-[14px] focus:ring-2 focus:ring-teal-500 outline-none text-gray-900 dark:text-white" placeholder="Min" type="number" />
+                        <input
+                          value={ageMin}
+                          onChange={(e) => setAgeMin(e.target.value)}
+                          className="w-full bg-gray-50 dark:bg-[#0b1326] p-2.5 border border-gray-200 dark:border-zinc-800 rounded-lg text-[14px] focus:ring-2 focus:ring-teal-500 outline-none text-gray-900 dark:text-white"
+                          placeholder="Min"
+                          type="number"
+                        />
                         <span className="text-gray-400 text-[12px] font-medium">to</span>
-                        <input className="w-full bg-gray-50 dark:bg-[#0b1326] p-2.5 border border-gray-200 dark:border-zinc-800 rounded-lg text-[14px] focus:ring-2 focus:ring-teal-500 outline-none text-gray-900 dark:text-white" placeholder="Max" type="number" />
+                        <input
+                          value={ageMax}
+                          onChange={(e) => setAgeMax(e.target.value)}
+                          className="w-full bg-gray-50 dark:bg-[#0b1326] p-2.5 border border-gray-200 dark:border-zinc-800 rounded-lg text-[14px] focus:ring-2 focus:ring-teal-500 outline-none text-gray-900 dark:text-white"
+                          placeholder="Max"
+                          type="number"
+                        />
                       </div>
                     </div>
                   </div>
@@ -82,7 +109,8 @@ export default function Methodology() {
               </details>
             </div>
           </div>
-        <WorkflowNav />
+
+          <WorkflowNav />
         </main>
       </div>
     </div>
