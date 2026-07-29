@@ -55,25 +55,32 @@ Status
 
 ---
 
+## Milestone 4 — Navigation ✅
+
+Completed
+
+- Created workflowSteps.ts as single source of truth for the 5-step workflow order
+- Built WorkflowNav component with automatic Back/Continue button logic
+- Added "Step X of Y" progress indicator to Header, shown only on workflow screens
+- Wired WorkflowNav into all 5 workflow screens (Study Planner through Protocol Preview)
+- Dashboard correctly excluded from step-counting, remains a hub
+
+---
+
 ## Current Milestone
 
-### Milestone 4 — Navigation
+### Milestone 5 — State Management
 
 Objective
 
-Connect all screens into a coherent, navigable application flow.
+Make data entered on one screen (e.g. Study Title on Study Planner) persist and appear on later screens, without a database yet.
 
 Status
 
 🟡 Not yet started
-
 ---
 
 ## Future Milestones
-
-Milestone 5
-
-State Management
 
 Milestone 6
 
