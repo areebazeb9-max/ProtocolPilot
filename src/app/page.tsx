@@ -1,11 +1,14 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import { useProtocol } from "@/context/ProtocolContext";
 import Header from "@/components/Header";
 
 export default function Dashboard() {
   const [isDarkMode, setIsDarkMode] = useState(true);
+   const { studyTitle } = useProtocol();
   const toggleTheme = () => {
+   
     setIsDarkMode(!isDarkMode);
     if (!isDarkMode) {
       document.documentElement.classList.add("dark");
@@ -34,7 +37,9 @@ export default function Dashboard() {
             <div className="lg:col-span-8 bg-teal-50/20 dark:bg-[#131b2e] border border-teal-100 dark:border-zinc-800 p-8 rounded-xl flex flex-col justify-between text-left relative overflow-hidden transition-colors shadow-sm">
               <div className="space-y-4">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-teal-500/10 text-[#008080] dark:text-[#76d6d5] text-[10px] font-bold uppercase rounded-full tracking-wider"><span className="w-1.5 h-1.5 bg-teal-500 rounded-full animate-pulse" />Resume Drafting</span>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-snug max-w-xl">Protocol CR-204: Neuro-Visual Response in Elderly Patients</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white leading-snug max-w-xl">
+  {studyTitle ? `Protocol: ${studyTitle}` : "Protocol CR-204: Neuro-Visual Response in Elderly Patients"}
+</h3>
                 <p className="text-xs text-gray-500 dark:text-[#bdc9c8]/70 leading-relaxed max-w-xl">Section 4: Patient Recruitment Methodology is 65% complete. Research suggests adding a diversity inclusion statement for local demographics.</p>
               </div>
               <div className="flex gap-3 mt-8">
