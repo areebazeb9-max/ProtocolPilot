@@ -67,13 +67,25 @@ Completed
 
 ---
 
+## Milestone 5 — State Management ✅
+
+Completed
+
+- Created ProtocolContext with React Context API for app-wide shared state
+- Connected Study Title (Study Planner), Intervention toggle (Study Design), and Population Description/Age Range (Methodology) to shared state
+- Verified all fields persist correctly when navigating between screens
+- Verified cross-screen display: Study Title set on Study Planner now shows on Dashboard's hero card
+- Note: Statistics and Protocol Preview have no user-input fields currently, so nothing to connect there
+
+---
+
 ## Current Milestone
 
-### Milestone 5 — State Management
+### Milestone 6 — Firebase Authentication & Firestore
 
 Objective
 
-Make data entered on one screen (e.g. Study Title on Study Planner) persist and appear on later screens, without a database yet.
+Add real user accounts and permanent data storage, so protocol data survives closing the browser — replacing the temporary in-memory state from Milestone 5 with a real database.
 
 Status
 
@@ -82,9 +94,7 @@ Status
 
 ## Future Milestones
 
-Milestone 6
 
-Firebase Authentication & Firestore
 
 Milestone 7
 
