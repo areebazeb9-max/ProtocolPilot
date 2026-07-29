@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
-import WorkflowNav from "@/components/WorkflowNav";
 import Header from "@/components/Header";
+import WorkflowNav from "@/components/WorkflowNav";
+import { useProtocol } from "@/context/ProtocolContext";
 
 export default function StudyDesign() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [hasIntervention, setHasIntervention] = useState<boolean | null>(false);
+  const { hasIntervention, setHasIntervention } = useProtocol();
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -79,7 +80,8 @@ export default function StudyDesign() {
               </section>
             </div>
           </div>
-        <WorkflowNav />
+
+          <WorkflowNav />
         </main>
       </div>
     </div>
