@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import WorkflowNav from "@/components/WorkflowNav";
 import Header from "@/components/Header";
 
 export default function StudyDesign() {
@@ -78,6 +79,7 @@ export default function StudyDesign() {
               </section>
             </div>
           </div>
+        <WorkflowNav />
         </main>
       </div>
     </div>

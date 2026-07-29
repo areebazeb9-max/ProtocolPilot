@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import WorkflowNav from "@/components/WorkflowNav";
 import Header from "@/components/Header";
 
 export default function StatisticsPlanning() {
@@ -72,6 +73,8 @@ export default function StatisticsPlanning() {
               </div>
             </div>
           </div>
+
+          <WorkflowNav />
         </div>
       </div>
     </div>

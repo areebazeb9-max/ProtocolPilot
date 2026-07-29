@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import WorkflowNav from "@/components/WorkflowNav";
 import Header from "@/components/Header";
 
 export default function Methodology() {
@@ -81,6 +82,7 @@ export default function Methodology() {
               </details>
             </div>
           </div>
+        <WorkflowNav />
         </main>
       </div>
     </div>

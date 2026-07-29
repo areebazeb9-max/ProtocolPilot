@@ -1,6 +1,7 @@
 ﻿"use client";
 import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import WorkflowNav from "@/components/WorkflowNav";
 import Header from "@/components/Header";
 
 export default function ProtocolCompleteness() {
@@ -62,6 +63,7 @@ export default function ProtocolCompleteness() {
               </div>
             </div>
           </div>
+        <WorkflowNav />
         </main>
       </div>
     </div>
