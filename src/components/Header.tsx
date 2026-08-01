@@ -1,6 +1,7 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { workflowSteps } from "@/lib/workflowSteps";
+import { useAuth } from "@/context/AuthContext";
 
 type HeaderProps = {
   isDarkMode: boolean;
@@ -9,8 +10,15 @@ type HeaderProps = {
 
 export default function Header({ isDarkMode, toggleTheme }: HeaderProps) {
   const pathname = usePathname();
+  const router = useRouter();
   const currentIndex = workflowSteps.findIndex((step) => step.href === pathname);
   const isInWorkflow = currentIndex !== -1;
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+    router.push("/login");
+  };
 
   return (
     <header className="flex justify-between items-center w-full h-16 px-8 sticky top-0 z-50 bg-white/80 dark:bg-[#0b1326]/80 backdrop-blur-md border-b border-gray-200 dark:border-[#3e4949]">
@@ -39,9 +47,27 @@ export default function Header({ isDarkMode, toggleTheme }: HeaderProps) {
             <span className="material-symbols-outlined text-[20px]">dark_mode</span>
           )}
         </button>
-        <div className="text-[10px] font-bold text-gray-400 dark:text-[#bdc9c8]/70 border border-gray-200 dark:border-[#3e4949] rounded px-2.5 py-1 uppercase bg-gray-50 dark:bg-[#131b2e]">
-          METRO HEALTH CLINICAL
-        </div>
+
+        {user ? (
+          <div className="flex items-center gap-3">
+            <span className="text-[11px] text-gray-500 dark:text-[#bdc9c8] hidden md:inline">
+              {user.email}
+            </span>
+            <button
+              onClick={handleLogout}
+              className="text-[10px] font-bold text-gray-400 dark:text-[#bdc9c8]/70 border border-gray-200 dark:border-[#3e4949] rounded px-2.5 py-1 uppercase bg-gray-50 dark:bg-[#131b2e] hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all"
+            >
+              Log Out
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => router.push("/login")}
+            className="text-[10px] font-bold text-[#008080] dark:text-[#76d6d5] border border-[#008080]/30 dark:border-[#76d6d5]/30 rounded px-2.5 py-1 uppercase bg-gray-50 dark:bg-[#131b2e] hover:bg-gray-100 dark:hover:bg-zinc-800 transition-all"
+          >
+            Log In
+          </button>
+        )}
       </div>
     </header>
   );
