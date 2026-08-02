@@ -4,6 +4,7 @@ import Sidebar from "@/components/Sidebar";
 import Header from "@/components/Header";
 import WorkflowNav from "@/components/WorkflowNav";
 import { useProtocol } from "@/context/ProtocolContext";
+import { generateProtocolPdf } from "@/lib/generatePdf";
 
 export default function ProtocolCompleteness() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
@@ -26,6 +27,20 @@ export default function ProtocolCompleteness() {
     } else {
       document.documentElement.classList.remove("dark");
     }
+  };
+
+  const handleExport = () => {
+    generateProtocolPdf({
+      studyTitle,
+      hasIntervention,
+      populationDescription,
+      ageMin,
+      ageMax,
+      variableType,
+      measurementScale,
+      groupStructure,
+      distribution,
+    });
   };
 
   const isFilled = (value: string | boolean | null) =>
@@ -81,6 +96,13 @@ export default function ProtocolCompleteness() {
                 Live progress based on the information you&apos;ve entered across each step.
               </p>
             </div>
+            <button
+              onClick={handleExport}
+              className="flex items-center gap-2 px-6 py-3 bg-[#008080] dark:bg-[#76d6d5] text-white dark:text-[#003737] font-semibold text-sm rounded-lg hover:opacity-90 transition-all shadow-lg shadow-teal-500/20 shrink-0"
+            >
+              <span className="material-symbols-outlined text-lg">download</span>
+              Export as PDF
+            </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
