@@ -3,9 +3,20 @@ import { useState } from "react";
 import Sidebar from "@/components/Sidebar";
 import WorkflowNav from "@/components/WorkflowNav";
 import Header from "@/components/Header";
+import { useProtocol } from "@/context/ProtocolContext";
 
 export default function StatisticsPlanning() {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+  const {
+    variableType,
+    setVariableType,
+    measurementScale,
+    setMeasurementScale,
+    groupStructure,
+    setGroupStructure,
+    distribution,
+    setDistribution,
+  } = useProtocol();
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -15,6 +26,9 @@ export default function StatisticsPlanning() {
       document.documentElement.classList.remove("dark");
     }
   };
+
+  const selectClasses =
+    "w-full bg-gray-50 dark:bg-[#0b1326] px-3 py-2 rounded-lg text-sm border border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-teal-500";
 
   return (
     <div className={`min-h-screen flex overflow-x-hidden font-sans transition-colors duration-300 ${isDarkMode ? 'dark bg-[#0b1326] text-[#dae2fd]' : 'bg-[#ffffff] text-gray-900'}`}>
@@ -33,41 +47,72 @@ export default function StatisticsPlanning() {
               </nav>
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white">Statistics Planning</h2>
             </div>
-
-            <div className="w-full md:w-64">
-              <div className="flex justify-between items-center mb-2">
-                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Analysis Progress</span>
-                <span className="text-[11px] font-bold text-[#008080] dark:text-[#76d6d5]">80% Complete</span>
-              </div>
-              <div className="w-full h-1.5 bg-gray-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                <div className="h-full bg-[#008080] shadow-[0_0_8px_rgba(0,128,128,0.4)]" style={{ width: "80%" }}></div>
-              </div>
-            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start text-left">
-            <div className="lg:col-span-4 space-y-6">
+            <div className="lg:col-span-6 space-y-6">
               <div className="bg-white dark:bg-[#131b2e] border border-gray-200 dark:border-zinc-800 p-5 rounded-2xl shadow-sm transition-colors">
                 <h3 className="text-sm font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white">
                   <span className="material-symbols-outlined text-[#008080] dark:text-[#76d6d5] text-xl">schema</span>
                   <span>Selection Parameters</span>
                 </h3>
 
-                <div className="space-y-6">
-                  <div className="flex gap-4">
-                    <div className="w-5 h-5 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 text-[#008080] dark:text-[#76d6d5] flex items-center justify-center text-[10px] font-bold flex-shrink-0">1</div>
-                    <div className="flex-1">
-                      <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1.5">Variable Type</label>
-                      <div className="bg-gray-50 dark:bg-[#0b1326] px-3 py-2 rounded-lg text-sm border border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-white">Outcome variable</div>
-                    </div>
+                <div className="space-y-5">
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1.5">Variable Type</label>
+                    <select
+                      value={variableType}
+                      onChange={(e) => setVariableType(e.target.value)}
+                      className={selectClasses}
+                    >
+                      <option value="">Select...</option>
+                      <option value="Outcome variable">Outcome variable</option>
+                      <option value="Exposure variable">Exposure variable</option>
+                      <option value="Confounding variable">Confounding variable</option>
+                    </select>
                   </div>
 
-                  <div className="flex gap-4">
-                    <div className="w-5 h-5 rounded-full bg-teal-50 dark:bg-teal-950/40 border border-teal-200 dark:border-teal-800 text-[#008080] dark:text-[#76d6d5] flex items-center justify-center text-[10px] font-bold flex-shrink-0">2</div>
-                    <div className="flex-1">
-                      <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1.5">Measurement Scale</label>
-                      <div className="bg-gray-50 dark:bg-[#0b1326] px-3 py-2 rounded-lg text-sm border border-gray-200 dark:border-zinc-800 text-gray-900 dark:text-white">Continuous</div>
-                    </div>
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1.5">Measurement Scale</label>
+                    <select
+                      value={measurementScale}
+                      onChange={(e) => setMeasurementScale(e.target.value)}
+                      className={selectClasses}
+                    >
+                      <option value="">Select...</option>
+                      <option value="Continuous">Continuous</option>
+                      <option value="Categorical">Categorical</option>
+                      <option value="Ordinal">Ordinal</option>
+                      <option value="Binary">Binary</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1.5">Group Structure</label>
+                    <select
+                      value={groupStructure}
+                      onChange={(e) => setGroupStructure(e.target.value)}
+                      className={selectClasses}
+                    >
+                      <option value="">Select...</option>
+                      <option value="Independent groups">Independent groups</option>
+                      <option value="Paired/matched groups">Paired/matched groups</option>
+                      <option value="Single group">Single group</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-400 uppercase mb-1.5">Distribution</label>
+                    <select
+                      value={distribution}
+                      onChange={(e) => setDistribution(e.target.value)}
+                      className={selectClasses}
+                    >
+                      <option value="">Select...</option>
+                      <option value="Normal distribution">Normal distribution</option>
+                      <option value="Non-normal distribution">Non-normal distribution</option>
+                      <option value="Unknown / not yet tested">Unknown / not yet tested</option>
+                    </select>
                   </div>
                 </div>
               </div>

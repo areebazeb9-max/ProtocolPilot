@@ -15,6 +15,14 @@ type ProtocolData = {
   setAgeMin: (value: string) => void;
   ageMax: string;
   setAgeMax: (value: string) => void;
+  variableType: string;
+  setVariableType: (value: string) => void;
+  measurementScale: string;
+  setMeasurementScale: (value: string) => void;
+  groupStructure: string;
+  setGroupStructure: (value: string) => void;
+  distribution: string;
+  setDistribution: (value: string) => void;
   saveProgress: () => Promise<void>;
   isSaving: boolean;
   lastSavedAt: Date | null;
@@ -25,14 +33,17 @@ const ProtocolContext = createContext<ProtocolData | undefined>(undefined);
 export function ProtocolProvider({ children }: { children: ReactNode }) {
   const { user } = useAuth();
   const [studyTitle, setStudyTitle] = useState("");
-  const [hasIntervention, setHasIntervention] = useState<boolean | null>(false);
+  const [hasIntervention, setHasIntervention] = useState<boolean | null>(null);
   const [populationDescription, setPopulationDescription] = useState("");
   const [ageMin, setAgeMin] = useState("");
   const [ageMax, setAgeMax] = useState("");
+  const [variableType, setVariableType] = useState("");
+  const [measurementScale, setMeasurementScale] = useState("");
+  const [groupStructure, setGroupStructure] = useState("");
+  const [distribution, setDistribution] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
 
-  // Whenever the logged-in user changes (login/logout), load their saved data
   useEffect(() => {
     if (!user) return;
 
@@ -42,10 +53,14 @@ export function ProtocolProvider({ children }: { children: ReactNode }) {
       if (docSnap.exists()) {
         const data = docSnap.data();
         setStudyTitle(data.studyTitle ?? "");
-        setHasIntervention(data.hasIntervention ?? false);
+        setHasIntervention(data.hasIntervention ?? null);
         setPopulationDescription(data.populationDescription ?? "");
         setAgeMin(data.ageMin ?? "");
         setAgeMax(data.ageMax ?? "");
+        setVariableType(data.variableType ?? "");
+        setMeasurementScale(data.measurementScale ?? "");
+        setGroupStructure(data.groupStructure ?? "");
+        setDistribution(data.distribution ?? "");
       }
     };
 
@@ -63,6 +78,10 @@ export function ProtocolProvider({ children }: { children: ReactNode }) {
         populationDescription,
         ageMin,
         ageMax,
+        variableType,
+        measurementScale,
+        groupStructure,
+        distribution,
       });
       setLastSavedAt(new Date());
     } finally {
@@ -83,6 +102,14 @@ export function ProtocolProvider({ children }: { children: ReactNode }) {
         setAgeMin,
         ageMax,
         setAgeMax,
+        variableType,
+        setVariableType,
+        measurementScale,
+        setMeasurementScale,
+        groupStructure,
+        setGroupStructure,
+        distribution,
+        setDistribution,
         saveProgress,
         isSaving,
         lastSavedAt,
