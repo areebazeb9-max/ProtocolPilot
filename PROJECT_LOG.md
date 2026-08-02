@@ -79,26 +79,31 @@ Completed
 
 ---
 
+## Milestone 6 — Firebase Authentication & Firestore ✅
+
+Completed
+
+- Created Firebase project, enabled Email/Password and Google sign-in
+- Built AuthContext for app-wide login state, using Firebase's onAuthStateChanged
+- Built /login page with signup, login, and Google sign-in, wired into Header (login status + logout)
+- Created Firestore database with security rules restricting each user to their own document
+- Connected ProtocolContext to Firestore: saveProgress() writes current fields, useEffect loads saved data on login
+- Added "Save Progress" button to WorkflowNav, gated behind login status
+- Verified full loop: save data, log out, log back in, data persists correctly
+
+---
+
 ## Current Milestone
 
-### Milestone 6 — Firebase Authentication & Firestore
+### Milestone 7 — Protocol Export
 
 Objective
 
-Add real user accounts and permanent data storage, so protocol data survives closing the browser — replacing the temporary in-memory state from Milestone 5 with a real database.
+Generate a downloadable protocol document (PDF) from the data entered across all screens.
 
 Status
 
 🟡 Not yet started
----
-
-## Future Milestones
-
-
-
-Milestone 7
-
-Protocol Export
 
 Milestone 8
 
