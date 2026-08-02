@@ -93,18 +93,28 @@ Completed
 
 ---
 
+## Milestone 7 — Protocol Export ✅
+
+Completed
+
+- Discovered Statistics and Protocol Preview screens had no real inputs in the original Stitch export (hardcoded display text only) — added real functionality before building export
+- Added 4 real dropdown fields to Statistics (Variable Type, Measurement Scale, Group Structure, Distribution), connected to shared state and Firestore
+- Rebuilt Protocol Preview's completeness gauge and section checklist to calculate honestly from real data, instead of hardcoded values
+- Installed jsPDF, built generateProtocolPdf() to produce a formatted document from all 9 protocol fields
+- Added "Export as PDF" button to Protocol Preview
+- Verified full pipeline: type data → persists via Context/Firestore → exports correctly into downloaded PDF
+
+---
+
 ## Current Milestone
 
-### Milestone 7 — Protocol Export
+### Milestone 8 — AI Assistant Integration
 
 Objective
 
-Generate a downloadable protocol document (PDF) from the data entered across all screens.
+Add AI-powered suggestions and guidance throughout the workflow, per ADR-005: AI should explain, suggest, and educate — never make decisions or generate protocols autonomously.
 
 Status
 
 🟡 Not yet started
 
-Milestone 8
-
-AI Assistant Integration
